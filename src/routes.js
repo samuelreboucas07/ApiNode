@@ -1,12 +1,10 @@
-const express = require('express');
+const express =  require('express');
 const routes = express.Router();
+const tarefaController = require('./controllers/tarefaController');
 
-const tweetController = require("./controllers/TweetControler");
-const likeController = require("./controllers/LikeControler");
-
-routes.get('/tweets', tweetController.index);
-routes.post('/tweets', tweetController.store);
-
-routes.post('/likes/:id', likeController.store);
-
+routes.get('/tarefas', tarefaController.index);
+routes.post('/tarefas', tarefaController.store);
+routes.get('/tarefas/:id', tarefaController.show);
+routes.put('/tarefas/:id', tarefaController.update);
+routes.delete('/tarefas/:id', tarefaController.delete);
 module.exports = routes;
