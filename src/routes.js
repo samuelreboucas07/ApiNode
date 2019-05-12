@@ -1,10 +1,16 @@
-const express =  require('express');
-const routes = express.Router();
-const tarefaController = require('./controllers/tarefaController');
+const express = require ('express')
+const multer = require('multer')
+const routes = express.Router()
+const multerConfig =  require('./config/multer')
 
-routes.get('/tarefas', tarefaController.index);
-routes.post('/tarefas', tarefaController.store);
-routes.get('/tarefas/:id', tarefaController.show);
-routes.put('/tarefas/:id', tarefaController.update);
-routes.delete('/tarefas/:id', tarefaController.delete);
-module.exports = routes;
+const BoxController = require('./controllers/BoxController')
+const FileController = require('./controllers/fileController')
+
+routes.post('/boxes', BoxController.store)
+routes.get('/boxes/:id', BoxController.show)
+
+
+routes.post('/boxes/:id/files', multer(multerConfig).single('file'), FileController.store)
+
+
+module.exports = routes
